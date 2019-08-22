@@ -1,0 +1,23 @@
+
+{% block content %}
+<h2>Welcome, <small>{{ user.username }}</small>!</h2>
+<p>Your email address: {{ user.email }}</p>
+<p>Department: {{ user.profile.user_type }}</p>
+<a href="{%url 'ya:create' %}">create</a>
+
+<ul>
+{%if user.is_authenticated%}
+
+  <form  action="{% url 'ya:logout' %}" method="post">
+    {%csrf_token%}
+    <button type="submit" >Logout</button>
+
+  </form>
+
+
+{%else%}
+<li><a href="{%url 'ya:login' %}">Login</a></li>
+<li><a href="{% url 'ya:signup'%} ">Signup</a></li>
+{%endif%}
+</ul>
+{% endblock %}

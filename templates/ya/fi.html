@@ -1,0 +1,32 @@
+{% extends 'ya/mainNavs.html' %}
+
+{% block title %} Files   {% endblock %}
+<!-- {'Files':path ,'FileNam':fil} -->
+{% block page %}
+<h2>IMPORTAINT:</h2>
+<br>
+<div>
+  {% for f in pro %}
+  <div class="form-group col-md-12">
+    <div class="col-md-3"> <label>Training Plan: </label></div>
+    <a href="{{ f.plan.url }}" target="_new">{{ f.plan }}</a>
+  </div>
+  <div class="form-group col-md-12">
+    <div class="col-md-3"> <label>Training Program: </label></div>
+    <a href="{{ f.program.url }}" target="_new" >{{ f.program }}</a>
+  </div>
+  <div class="form-group col-md-12">
+    <div class="col-md-3"> <label>Training Regulations: </label></div>
+    <a href="{{ f.regul.url }}" target="_new">{{ f.regul }}</a>
+  </div>
+  <div class="form-group col-md-12">
+  <div class="col-md-3"> <label> Deadline : </label></div>
+  {{f.date}}
+</div>
+  {% endfor %}
+<br> <br> <br>
+  <br>
+
+</div>
+
+{% endblock %}

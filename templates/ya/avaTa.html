@@ -1,0 +1,90 @@
+{% extends 'ya/mainNavs.html' %}
+
+{% block title %} avalible Trainings   {% endblock %}
+
+{% block page %}
+<br>
+<br>
+
+<br><br>
+    {% if Trainings %}
+        <table id="trainingTable" class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">organization name </th>
+                    <th scope="col">training name </th>
+                    <th scope="col">Hours </th>
+                    <th scope="col">number Of Students </th>
+                    <th scope="col">description </th>
+                    <th scope="col">added Date </th>
+                    <th scope="col"> </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for train in Trainings %}
+                    {% if train.status == 4 or train.status == 1  %}
+                        <tr>
+                            <th scope="row"><a href="{% url 'ya:orgnaization-detail' uid=train.user.pk %}">{{train.user.first_name}} {{train.user.last_name}}</a></th>
+                            <td>{{train.name}}</td>
+                            <td>{{train.hours}}</td>
+                            <td>{{train.numberOfStudents}}</td>
+                            <td>{{train.description}}</td>
+                            <td>{{train.date}}</td>
+                            <td><button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="myFunction({{ train.user.pk }})">Joining request</button></td>
+                        </tr>
+                    {% else %}
+
+
+                    {% endif  %}
+
+                {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+    <p> there are no Trainings </p>
+    {%endif%}
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Confirmation for join request</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure for join request</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary ok_btn" value="0">Ok</button>
+            </div>
+        </div>
+          
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(".ok_btn").click(function(e){
+            var id_number = document.getElementsByClassName("ok_btn")[0].value;
+            url = "{% url 'ya:join-request'  uid=0 %}".replace('0', id_number);
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function( data ) 
+                {
+                    $('#myModal').modal('hide');
+                    location.reload();
+                    document.getElementsByClassName('ok_btn')[0].setAttribute("value"," ")
+                }
+            });
+        });
+        function myFunction(uid) {
+            document.getElementsByClassName('ok_btn')[0].setAttribute("value", uid);
+        }
+    </script>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+
+
+{% extends "base2.html" %}
+{%block content%}
+<h2>Sign in</h2>
+
+<form  style="color:#2BB2E3" action="{% url 'ya:login' %}" method="post"><!--name"login"-->
+  {% csrf_token %}
+    {{ form.as_p }}
+  <input type="submit" class="btn btn-primary btn-block"name="" value="Login">
+  <p>Don't have an account? <a href="{% url 'ya:signup' %}">SignUp</a></p>
+</form>
+{%endblock%}

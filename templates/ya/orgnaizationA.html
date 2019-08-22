@@ -1,0 +1,60 @@
+{% extends 'ya/OrgmainNavs.html' %}
+
+{% block title %} training  informatiom  {% endblock %}
+
+{% block page %}
+        {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <div class="alert alert-success" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% if train %}
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">training name </th>
+      <th scope="col">Hours </th>
+      <th scope="col">number Of Students </th>
+      <th scope="col">description </th>
+      <th scope="col">added Date </th>
+      <th scope="col">status </th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>{{train.name}}</td>
+          <td>{{train.hours}}</td>
+          <td>{{train.numberOfStudents}}</td>
+          <td>{{train.description}}</td>
+          <td>{{train.date}}</td>
+          {% if user.training.status < 5 and user.training.status  != 5 %}
+          <td>
+              <form action="" method="POST">
+              {% csrf_token %}
+              <select class="custom-select" onchange="this.form.submit()" name="status">
+                      <option value="1"{% if train.status == 1 %} selected {% endif %} >Available</option>
+                      <option value="2"{% if train.status == 2 %} selected {% endif %} >Full</option>
+                      <option value="3"{% if train.status == 3 %} selected {% endif %} >closed</option>
+                      <option value="4"{% if train.status == 4 %} selected {% endif %} disabled>approved</option>
+              </select>
+              </form>
+          </td>
+      {% else %}
+      <td>{{train.get_status_display}}</td>
+
+      {% endif  %}
+      </tr>
+    
+  </tbody>
+</table>
+
+{% else %}
+<p> there are no Trainings </p>
+{%endif%}
+{% endblock %}

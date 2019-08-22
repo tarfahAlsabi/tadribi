@@ -1,0 +1,12 @@
+{% extends 'ya/mainNavs.html' %}
+
+{% block title %} home page   {% endblock %}
+
+{% block page %}
+
+          <h2>Welcome, <small>{{ user.first_name }}</small>!</h2>
+          <p>Your email address: {{ user.email }}</p>
+          
+{% endblock %}
+
+

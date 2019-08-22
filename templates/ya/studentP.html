@@ -1,0 +1,60 @@
+{% extends 'ya/mainNavs.html' %}
+
+{% block title %} profile   {% endblock %}
+
+{% block page %}
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <div class="alert alert-success" role="alert">
+        {{ message }}
+    </div>
+
+    {% endfor %}
+</ul>
+{% endif %}
+
+          <form method="POST" action="">
+              {% csrf_token %}
+
+            <div>
+              <div class="form-group col-md-12">
+                <div class="col-md-3"> <label> User name: </label></div>
+                <div class="col-md-6"> <input class="form-control"  type="text" disabled value="{{ user.username }}"> </div>
+              </div>
+              <div class="form-group col-md-12">
+                <div class="col-md-3"> <label> First name: </label></div>
+                <div class="col-md-6"> <input class="form-control"  type="text" disabled value="{{ user.first_name }}"> </div>
+              </div>
+              <div class="form-group col-md-12">
+                <div class="col-md-3"> <label> Last name: </label></div>
+                <div class="col-md-6"><input class="form-control"  type="text" disabled value="{{ user.last_name }}"></div>
+              </div>
+              <div class="form-group col-md-12">
+                <div class="col-md-3"> <label> Email address: </label></div>
+                <div class="col-md-6"><input class="form-control"  type="text" disabled value="{{ user.email }}"></div>
+              </div>
+              <div class="form-group col-md-12">
+                <div class="col-md-3"> <label> GPA:  </label></div>
+                <div class="col-md-6"><input  class="form-control" type="number" value="{{pro.GPA}}" max="5"  min="1"  step="any" name="GPA" required> </div>
+              </div>
+
+              <div class="form-group col-md-12">
+                <div class="col-md-3"> <label> Phone: </label></div>
+                <div class="col-md-6"> <input class="form-control"  type="tel" value="{{pro.phone}}" name=phone pattern='^[0-9\-\+]{9,15}$' required> </div>
+              </div>
+
+              {% comment %} <p>User name:<small>{{ user.username }}</small>!</p>
+              <p>First name: {{ user.first_name }}</p>
+              <p>Last name: {{ user.last_name }}</p>
+              <p>Your email address: {{ user.email }}</p>
+              <h2>GPA: </h2> <input type="number"  max="5"  min="1"  step="any" name="GPA" value={{pro.GPA}}>
+              <h2>Phone: </h2> <input type="tel"  name=phone value={{pro.phone}}>  {% endcomment %}
+              <br>
+              <div class="form-group col-md-12">
+                  <button type="submit" class="btn btn-primary">update profile</button>
+              </div>
+          </div>
+        </form>
+{% endblock %}

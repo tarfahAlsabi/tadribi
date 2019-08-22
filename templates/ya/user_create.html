@@ -1,0 +1,56 @@
+{% extends 'ya/mainNavs.html' %}
+
+{% block title %} CV   {% endblock %}
+
+{% block page %}
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <div class="alert alert-success" role="alert">
+        {{ message }}
+    </div>
+
+    {% endfor %}
+</ul>
+{% endif %}
+    {% if pro %}
+    <h2>CV:</h2>
+          <form method="POST" action="" enctype="multipart/form-data">
+              {% csrf_token %}
+
+            <div>
+              <div class="form-group col-md-12">
+                <div class="col-md-3"> <label> Language: </label></div>
+                <div class="col-md-6"> <input class="form-control" name="language" type="text" value="{{pro.language}}"required> </div>
+              </div>
+              <div class="form-group col-md-12">
+                <div class="col-md-3"> <label> Experince: </label></div>
+                <div class="col-md-6"> <input class="form-control"  name="experince" type="text" value="{{pro.experince}}"required> </div>
+              </div>
+              <div class="form-group col-md-12">
+                <div class="col-md-3"> <label> Skills: </label></div>
+                <div class="col-md-6"> <input class="form-control" name="skills" type="text" value="{{pro.skills}}"required> </div>
+              </div>
+              <div class="form-group col-md-12">
+                <div class="col-md-3"> <label> Cerfication: </label></div>
+                <a href="{{ user.cv.cerfication.url }}" target="_new" style="margin-left: 8px;">{{ user.cv.cerfication }}</a>
+                <br>
+                <div class="col-md-6"> <input class="form-control" name="cerfication" type="file" value="{{pro.cerfication}}"required> </div>
+              </div>
+
+
+              <br>
+              <div class="form-group col-md-12">
+                  <button type="submit" class="btn btn-primary">Save</button>
+              </div>
+          </div>
+        </form>
+        {% else %}
+
+          <h3>There is no CV yet!</h3>
+          <a href="{% url 'ya:studentC' %}">
+          <button type="submit" class="btn btn-primary">Create CV</button></a>
+
+        {%endif%}
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'ya/OrgmainNavs.html' %}
+
+{% block title %} Add Training   {% endblock %}
+
+{% block page %}
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <div class="alert alert-success" role="alert">
+        {{ message }}
+    </div>
+
+    {% endfor %}
+</ul>
+{% endif %}
+
+          <form method="POST" action="" >
+              {% csrf_token %}
+
+            <div>
+              <div class="form-group col-md-12">
+                <div class="col-md-3"> <label> Name: </label></div>
+                <div class="col-md-6"> <input class="form-control" name="name" type="text" value="{{pro.name}}"> </div>
+              </div>
+              <div class="form-group col-md-12">
+                <div class="col-md-3"> <label> Date: </label></div>
+                <div class="col-md-6"> <input class="form-control"  name="date" type="date" value="{{pro.date}}" required> </div>
+              </div>
+              <div class="form-group col-md-12">
+                <div class="col-md-3"> <label> Hours: </label></div>
+                <div class="col-md-6"> <input class="form-control" name="hours"  min="1" type="number" value="{{pro.hours}}"required> </div>
+              </div>
+              <div class="form-group col-md-12">
+                <div class="col-md-3"> <label> Number of students: </label></div>
+                <div class="col-md-6"> <input class="form-control" name="numberOfStudents"  min="1" type="number" value="{{pro.numberOfStudents}}"required> </div>
+              </div>
+              <div class="form-group col-md-12">
+                <div class="col-md-3"> <label> Description: </label></div>
+                <div class="col-md-6"> <input class="form-control" name="description" type="textarea" value="{{pro.description}}"required> </div>
+              </div>
+
+
+              {% comment %} <div class="form-group col-md-12">
+                <div class="col-md-3"> <label> Status: </label></div>
+
+                <select  name="status" >
+                  <option value="{{pro.status}}" >full</option>
+                  <option value="{{pro.status}}">avalible</option>
+
+                </select>
+
+              </div> {% endcomment %}
+
+
+              <br>
+              <div class="form-group col-md-12">
+                  <button type="submit" class="btn btn-primary">Add</button>
+              </div>
+          </div>
+        </form>
+{% endblock %}

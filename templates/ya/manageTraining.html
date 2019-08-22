@@ -1,0 +1,66 @@
+{% extends 'ya/CommNavs.html' %}
+
+{% block title %} manage Trainings  {% endblock %}
+
+{% block page %}
+<h1>manage Trainings </h1>
+    
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <div class="alert alert-success" role="alert">
+        {{ message }}
+    </div>
+
+    {% endfor %}
+</ul>
+{% endif %}
+
+          {% if Trainings %}
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">organization name </th>
+                <th scope="col">training name </th>
+                <th scope="col">Hours </th>
+                <th scope="col">number Of Students </th>
+                <th scope="col">description </th>
+                <th scope="col">added Date </th>
+                <th scope="col">status </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for train in Trainings %}
+                <tr>
+                    <th scope="row">{{train.user.username}}</th>
+                    <td>{{train.name}}</td>
+                    <td>{{train.hours}}</td>
+                    <td>{{train.numberOfStudents}}</td>
+                    <td>{{train.description}}</td>
+                    <td>{{train.date}}</td>
+                    {% if train.status > 3 %}
+                        <td>
+                            <form action="" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{train.user}}" name="user">
+                            <select class="custom-select" onchange="this.form.submit()" name="status">
+                                    <option value="4"{% if train.status == 4 %} selected {% endif %} >approved</option>
+                                    <option value="5"{% if train.status == 5 %} selected {% endif %} >reject</option>
+                                    <option value="6"{% if train.status == 6 %} selected {% endif %} disabled>waiting for Approval</option>
+                            </select>
+                            </form>
+                        </td>
+                    {% else %}
+                    <td>{{train.get_status_display}}</td>
+
+                    {% endif  %} 
+
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+          {% else %}
+          <p> there are no Trainings </p>
+          {%endif%}
+{% endblock %}

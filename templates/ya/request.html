@@ -1,0 +1,43 @@
+{% extends 'ya/mainNavs.html' %}
+
+{% block title %} Request   {% endblock %}
+
+{% block page %}
+{% if obj %}
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Student name </th>
+      <th scope="col">Orgnaization name </th>
+      <th scope="col">Hours </th>
+      <th scope="col">description </th>
+      <th scope="col">status </th>
+    </tr>
+  </thead>
+  <tbody>
+{% for j in obj %}
+    <tr>
+        <th scope="row">{{ j.st_user.first_name}}</th>
+        <td>{{j.org_user.first_name}}</td>
+        <td>{{j.org_user.training.hours}}</td>
+        <td>{{j.org_user.training.description}}</td>
+          {% if j.student_status == '0'  %}
+        <td>wait</td>
+        {% else %}
+    <td>accepted</td>
+
+        {% endif  %}
+
+
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+
+{% else %}
+<h3> there are no requests yet!</h3>
+{%endif%}
+{% endblock %}

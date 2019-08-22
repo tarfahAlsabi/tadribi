@@ -1,0 +1,46 @@
+{% extends 'ya/CommNavs.html' %}
+
+{% block title %} importaint files  {% endblock %}
+
+{% block page %}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <div class="alert alert-success" role="alert">
+        {{ message }}
+    </div>
+
+    {% endfor %}
+</ul>
+{% endif %}
+<h2>Update informations: </h2>
+          <form method="POST" action="" enctype="multipart/form-data">
+              {% csrf_token %}
+
+            <div>
+
+              <div class="form-group col-md-12">
+                <div class="col-md-3"> <label>Training Plan: </label></div>
+                <div class="col-md-6"> <input class="form-control" name="plan" type="file" value="{{pro.plan}}"required> </div>
+              </div>
+              <div class="form-group col-md-12">
+                <div class="col-md-3"> <label>Training Program: </label></div>
+                <div class="col-md-6"> <input class="form-control" name="program" type="file" value="{{pro.program}}"required> </div>
+              </div>
+              <div class="form-group col-md-12">
+                <div class="col-md-3"> <label>Training Regulations: </label></div>
+                <div class="col-md-6"> <input class="form-control" name="regul" type="file" value="{{pro.regul}}"required> </div>
+              </div>
+              <div class="form-group col-md-12">
+              <div class="col-md-3"> <label> Date: </label></div>
+              <div class="col-md-6"> <input class="form-control"  name="date" type="date" value="{{pro.date}}" required> </div>
+            </div>
+
+<br> <br> <br>
+              <br>
+              <div class="form-group col-md-12">
+                  <button type="submit" class="btn btn-primary">Upload</button>
+              </div>
+          </div>
+        </form>
+{% endblock %}

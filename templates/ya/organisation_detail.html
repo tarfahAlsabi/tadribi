@@ -1,0 +1,40 @@
+{% extends 'ya/mainNavs.html' %}
+
+{% block title %} Organisation {% endblock %}
+
+{% block page %}
+    <div>
+
+        <div class="form-group col-md-12">
+            <div class="col-md-3"> <label> Username: </label></div>
+            <div class="col-md-6"> {{ obj.user.username }} </div>
+        </div>
+        <div class="form-group col-md-12">
+            <div class="col-md-3"> <label> Name: </label></div>
+            <div class="col-md-6"> {{ obj.name }} </div>
+        </div>
+        <div class="form-group col-md-12">
+            <div class="col-md-3"> <label> Date: </label></div>
+            <div class="col-md-6">{{ obj.date }}</div>
+        </div>
+        <div class="form-group col-md-12">
+            <div class="col-md-3"> <label> Hours: </label></div>
+            <div class="col-md-6">{{ obj.hours }}</div>
+        </div>
+        <div class="form-group col-md-12">
+            <div class="col-md-3"> <label> Number Of Student:  </label></div>
+            <div class="col-md-6">{{obj.numberOfStudents}}</div>
+        </div>
+
+        <div class="form-group col-md-12">
+            <div class="col-md-3"> <label> Description:  </label></div>
+            <div class="col-md-6">{{obj.description}} </div>
+        </div>
+
+        <div class="form-group col-md-12">
+            <div class="col-md-3"> <label> Status:  </label></div>
+            <div class="col-md-6">{{obj.status}} </div>
+        </div>
+
+    </div>
+{% endblock %}

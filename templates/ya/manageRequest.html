@@ -1,0 +1,72 @@
+{% extends 'ya/OrgmainNavs.html' %}
+
+{% block title %} manage Trainings  {% endblock %}
+
+{% block page %}
+<h1>manage Trainings </h1>
+    
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <div class="alert alert-success" role="alert">
+        {{ message }}
+    </div>
+
+    {% endfor %}
+</ul>
+{% endif %}
+
+          {% if Trainings %}
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">name </th>
+                <th scope="col">GPA </th>
+                <th scope="col">Phone </th>
+                
+                <th scope="col"> language </th>
+                <th scope="col"> experince </th>
+                <th scope="col"> skills </th>
+                <th scope="col"> cerfication </th>
+
+                <th scope="col"> status </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for train in Trainings %}
+                <tr>
+                    <th scope="row">{{train.st_user.username}}</th>
+                    <td>{{train.st_user.stdProfile.GPA}}</td>
+                    <td>{{train.st_user.stdProfile.phone}}</td>
+
+                    <td>{{train.st_user.cv.language}}</td>
+                    <td>{{train.st_user.cv.experince}}</td>
+                    <td>{{train.st_user.cv.skills}}</td>
+                    <td><a href="{{ train.st_user.cv.cerfication.url }}" target="_new">view cerfication </a></td>
+                        <td>
+                        <!-- 
+                       org_status_choices = ( (0, 'accepted'),(1, 'rejected'),(2, "waiting for Approval"))
+
+                        models.CharField(max_length= 20, default=2, choices = org_status_choices,)
+                         -->
+                            <form action="" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{train.st_user}}" name="user">
+                            <select class="custom-select" onchange="this.form.submit()" name="status">
+                                    <option value=0 {% if train.organisationStatus == '0' %} selected {% endif %} >accepted</option>
+                                    <option value=1 {% if train.organisationStatus == '1' %} selected {% endif %} >rejected</option>
+                                    <option value=2 {% if train.organisationStatus == '2' %} selected {% endif %} >waiting for Approval</option>
+                            </select>
+                            </form>
+                        </td>
+
+
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+          {% else %}
+          <p> there are no Trainings </p>
+          {%endif%}
+{% endblock %}
